@@ -1,12 +1,12 @@
 To do:
 
-- Levantar proyecto base en nextjs []
-- Crear types de las criptos []
+- Levantar proyecto base en nextjs [x]
+- Crear types de las criptos [x]
 
 Crear lo siguiente de manera simple para tener una base:
-    - Landing page de una sola vista []
-    - Login page []
-    - Vista de listado de criptos []
+    - Landing page de una sola vista [x]
+    - Login page [x]
+    - Vista de listado de criptos [x]
 
 - Usar pnpm install json-server para simular datos []
 - Crear un endpoint en api/route.ts para manejar los datos []
