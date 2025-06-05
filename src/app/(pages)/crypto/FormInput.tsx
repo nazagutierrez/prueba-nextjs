@@ -1,3 +1,4 @@
+import { FormProps } from "@/app/types/types";
 import React from "react";
 
 const FormInput = ({
@@ -6,23 +7,14 @@ const FormInput = ({
   classname,
   children,
   submitFunc,
-}: {
-  name: string;
-  type: string;
-  classname?: string;
-  children?: React.ReactNode;
-  submitFunc?: () => void;
-}) => {
+}: FormProps) => {
   return (
     <th
-      className={`px-6 py-4 font-medium whitespace-nowrap text-white ${classname}`}
+      className={`py-4 font-medium whitespace-nowrap text-white ${classname}`}
     >
       <input
         onKeyDown={(e) =>
-          e.key === "Enter" &&
-          submitFunc?.() &&
-          e.preventDefault() &&
-          console.log(e)
+          e.key === "Enter" && submitFunc?.() && e.preventDefault()
         }
         name={name}
         type={type}

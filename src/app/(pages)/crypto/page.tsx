@@ -1,35 +1,44 @@
-'use client';
+"use client";
 
-import React from "react";
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getCryptos, createCrypto, deleteCryptoById } from '@/app/services/cryptoService';
+import React, { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getCryptos, createCrypto, deleteCryptoById } from "@/app/services/cryptoService";
 import { ICrypto } from "@/app/types/types";
-import { IoAddOutline } from "react-icons/io5";
-import { FaTrash } from "react-icons/fa";
 import { titleFont } from "@/app/fonts";
 import Skeleton from "@/app/utils/Skeleton";
-import FormInput from "./FormInput";
-import { Slide, ToastContainer, toast } from 'react-toastify';
+import { Slide, ToastContainer, toast } from "react-toastify";
+import { useUserContext } from "@/app/context/userContext";
+import Modal from "./Modal";
+import AddCryptoRow from "./components/AddCryptoRow";
+import ListCryptoRow from "./components/ListCryptoRow";
+import TableHead from "./components/TableHead";
+import MobileTable from "./components/MobileTable";
 
 const Crypto = () => {
   const queryClient = useQueryClient();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null);
+  const { user } = useUserContext();
 
-  const { data: cryptos, isLoading, isError } = useQuery({
-    queryKey: ['cryptos'],
+  // Get cryptos
+  const { data: cryptos, isLoading } = useQuery({
+    queryKey: ["cryptos"],
     queryFn: getCryptos,
+  });
+
+  // React Query mutations for CRUD operations
+  const deleteCryptoMutation = useMutation({
+    mutationFn: (cryptoIdDelete: ICrypto["id"]) =>
+      deleteCryptoById(cryptoIdDelete),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cryptos"] });
+    },
   });
 
   const createCryptoMutation = useMutation({
     mutationFn: (newCrypto: ICrypto) => createCrypto(newCrypto),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cryptos'] });
-    },
-  });
-
-  const deleteCryptoMutation = useMutation({
-    mutationFn: (cryptoIdDelete: ICrypto["id"]) => deleteCryptoById(cryptoIdDelete),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cryptos'] });
+      queryClient.invalidateQueries({ queryKey: ["cryptos"] });
     },
   });
 
@@ -54,6 +63,7 @@ const Crypto = () => {
       return;
     }
 
+    // Create crypto
     createCryptoMutation.mutate(newCrypto, {
       onSuccess: () => {
         cryptoName.value = '';
@@ -61,72 +71,72 @@ const Crypto = () => {
         price.value = '';
         amount.value = '';
       },
-      onError: (error: any) => {
-        toast(error);
+      onError: (error: Error) => {
+        toast(error.message);
       },
     });
   };
 
-
-  if (isError) return <p>Hubo un error cargando los datos.</p>;
-
-  const tableHeads = ["Tickler", "Price", "Amount"];
-
   return (
-    <div className="relative flex flex-col items-center justify-start p-20 pt-32 h-full">
+    <div className="animate-fade-in-up relative flex flex-col items-center justify-start p-5 lg:p-20 pt-32 h-full">
       <h1 className={`${titleFont.className} text-4xl py-5`}>Listed cryptos</h1>
+      {user?.username && (
+        <h1 className="pb-5">
+          Hi{" "}
+          <span className="underline underline-offset-4 decoration-yellow-500/80">
+            {user.username}
+          </span>
+          , welcome to your crypto tracker
+        </h1>
+      )}
       <form onSubmit={handleFormSubmit} id="myform"></form>
-      <div className='absolute mx-auto h-full w-[350px] bg-neutral-600/5 blur-3xl -z-20'></div>
-      <table className="w-3/4 text-sm text-left my-12 text-neutral-300">
-        <thead className="text-xs uppercase bg-[#645f1a54] border-b border-[#645f1a88] text-neutral-400">
-          <tr>
-            <th scope="col" className="px-3 sm:px-6 py-3">
-              Crypto name
+      <div className="absolute mx-auto h-full w-[350px] bg-neutral-600/5 blur-3xl -z-20"></div>
+      {/* Mobile view */}
+      <MobileTable
+        deleteCryptoMutation={deleteCryptoMutation}
+        cryptos={cryptos} 
+        setSelectedCrypto={setSelectedCrypto}
+        setIsModalOpen={setIsModalOpen}
+      />
+      <table className="w-3/4 text-sm text-left my-12 text-neutral-300 hidden lg:table">
+        <TableHead />
+        {isLoading && <Skeleton />}
+        
+        {cryptos?.length === 0 && (
+          <tr className="border-b w-full border-neutral-700">
+            <th
+              colSpan={4}
+              className="w-full py-4 text-center font-medium  text-neutral-300"
+            >
+              No cryptos listed
             </th>
-            {
-              tableHeads.map((head) => (
-                <th key={head} scope="col" className="px-3 sm:px-6 py-3 text-center">
-                  {head}
-                </th>
-              ))
-            }
           </tr>
-        </thead>
-        {  isLoading && <Skeleton /> }
+        )}
+
         <tbody>
-          {
-            cryptos?.map((crypto) => (
-              <tr key={crypto.name} className="relative border-b border-neutral-700">
-                <th
-                  scope="row"
-                  className="px-3 sm:px-6 py-4 font-medium whitespace-nowrap text-white"
-                > 
-                  {crypto.name}
-                </th>
-                <td className="px-3 sm:px-6 py-4 text-center">{crypto.ticker}</td>
-                <td className="px-3 sm:px-6 py-4 text-center">${crypto.price.toLocaleString()}</td>
-                <td className="px-3 sm:px-6 py-4 text-center">{crypto.amount}</td>
-                <td>
-                  <button onClick={() => deleteCryptoMutation.mutate(crypto.id)} className="absolute justify-items-center rounded-r cursor-pointer text-red-400/70 hover:text-red-400 w-7 -right-7 h-[65%] content-center transition-colors" style={{ alignSelf: "anchor-center"}}>
-                    <FaTrash />
-                  </button> 
-                </td>
-              </tr>
-            ))
-          }
-          <tr className="border-b border-neutral-700">
-            <FormInput name="cryptoName" type="text" />
-            <FormInput name="tickler" type="text" classname="text-center" />
-            <FormInput name="price" type="number" classname="text-center" />
-            <FormInput submitFunc={handleFormSubmit} name="amount" type="number" classname="text-center relative" submitFunc={handleFormSubmit}>
-              <button form="myform" className="absolute justify-items-center rounded-r text-2xl cursor-pointer bg-amber-300 w-14 text-black -right-14 h-full content-center" style={{ alignSelf: "anchor-center"}}>
-                <IoAddOutline />
-              </button> 
-            </FormInput>
-          </tr>
+          <ListCryptoRow
+            deleteCryptoMutation={deleteCryptoMutation}
+            cryptos={cryptos}
+            setSelectedCrypto={setSelectedCrypto}
+            setIsModalOpen={setIsModalOpen}
+          />
+          <AddCryptoRow handleFormSubmit={handleFormSubmit} />
         </tbody>
       </table>
-      <ToastContainer 
+
+      {/* Modal for editing a crypto */}
+      {selectedCrypto && (
+        <Modal
+          crypto={selectedCrypto}
+          open={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedCrypto(null);
+          }}
+        />
+      )}
+
+      <ToastContainer
         theme="dark"
         transition={Slide}
         autoClose={1500}
