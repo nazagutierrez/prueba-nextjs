@@ -1,6 +1,6 @@
 # Prueba técnica | Crypto Tracker
 
-Proyecto desarrollado con React, Next.js, TailwindCSS, Zod y React Query. Utiliza una base de datos simulada con json-server para gestión de datos en desarrollo.
+Proyecto desarrollado con React, Next.js, TailwindCSS, Zod y React Query. Utiliza una base de datos simulada con json-server y una api en Next.js para gestión de datos en desarrollo y una mock api en producción.
 
 ## Demo desplegada
 Link a la demo desplegada en Vercel: https://nextjs-prueba-tecnica.vercel.app/
