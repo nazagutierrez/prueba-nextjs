@@ -2,6 +2,9 @@
 
 Proyecto desarrollado con React, Next.js, TailwindCSS, Zod y React Query. Utiliza una base de datos simulada con json-server para gestión de datos en desarrollo.
 
+## Demo desplegada
+Link a la demo desplegada en Vercel: https://nextjs-prueba-tecnica.vercel.app/
+
 ## Instalación
 
 1. Ejecutar `npm install` para instalar las dependencias.
