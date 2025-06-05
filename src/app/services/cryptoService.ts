@@ -1,6 +1,6 @@
 import { ICrypto } from "../types/types";
 
-const BASE_URL = "/api/cryptos";
+const BASE_URL = process.env.EXTERNAL_API_BASE_URL || "/api/cryptos";
 const JSON_HEADERS = {
   "Content-Type": "application/json",
 };

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 export const dynamic = "force-static";
-const BASE_URL = "http://localhost:3000/cryptos";
+const BASE_URL = process.env.EXTERNAL_API_BASE_URL || "http://localhost:3000/cryptos";
 const JSON_HEADERS = {
   "Content-Type": "application/json",
 };
