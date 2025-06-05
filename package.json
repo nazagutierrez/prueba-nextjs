@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "startdb": "pnpx json-server db.json",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,12 +13,15 @@
     "@tailwindcss/postcss": "^4.1.8",
     "@tanstack/react-query": "^5.80.2",
     "gsap": "^3.13.0",
+    "json-server": "1.0.0-beta.3",
     "next": "15.3.3",
     "postcss": "^8.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "tailwindcss": "^4.1.8"
+    "react-toastify": "^11.0.5",
+    "tailwindcss": "^4.1.8",
+    "zod": "^3.25.51"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
