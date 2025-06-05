@@ -1,9 +1,9 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import { mainFont } from "./fonts";
 import Navbar from "./components/Navbar";
 import ReactQueryProvider from "./components/ReactQueryProvider";
+import UserProvider from "./context/userProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,14 +15,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  
   return (
     <html lang="en">
+      <title>Crypto tracker</title>
       <body className={`${mainFont.className}`}>
-        <Navbar />
-        <ReactQueryProvider>
-          {children}
-        </ReactQueryProvider>
+        <UserProvider>
+          <Navbar />
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </UserProvider>
       </body>
     </html>
   );
