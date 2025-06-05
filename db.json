@@ -1,0 +1,58 @@
+{
+  "cryptos": [
+    {
+      "id": "2",
+      "name": "Bitcoin",
+      "ticker": "BTC",
+      "price": 90000,
+      "amount": 300
+    },
+    {
+      "id": "3",
+      "name": "Litecoin",
+      "ticker": "LTC",
+      "price": 140,
+      "amount": 1000
+    },
+    {
+      "id": "0d88bc52-8c1b-4396-85e2-36d2fcf16d7c",
+      "name": "Dollar",
+      "ticker": "USDT",
+      "price": 1,
+      "amount": 10000
+    },
+    {
+      "id": "37ac1e80-2c3a-4b38-9cde-9ba65b2732a8",
+      "name": "Papri",
+      "ticker": "PRC",
+      "price": 20,
+      "amount": 300
+    },
+    {
+      "id": "71758942-a969-4270-8a40-33accbbfb178",
+      "name": "Ethereum",
+      "ticker": "ETH",
+      "price": 7600,
+      "amount": 20
+    },
+    {
+      "id": "b9743cbe-6b1d-4836-9928-56e83dd3bdc5",
+      "name": "Easa",
+      "ticker": "aa",
+      "price": 12,
+      "amount": 12
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "user1",
+      "password": "123456"
+    },
+    {
+      "id": "2",
+      "username": "user2",
+      "password": "123456"
+    }
+  ]
+}
