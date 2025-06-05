@@ -1,6 +1,11 @@
 import { ICrypto } from "../types/types";
 
 const BASE_URL = "/api/cryptos";
+const JSON_HEADERS = {
+  "Content-Type": "application/json",
+};
+
+// Controllers for CRUD
 
 export async function getCryptos(): Promise<ICrypto[]> {
   const res = await fetch(BASE_URL);
@@ -12,9 +17,7 @@ export async function getCryptos(): Promise<ICrypto[]> {
 export async function createCrypto(crypto: ICrypto): Promise<ICrypto> {
   const res = await fetch(BASE_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: JSON_HEADERS,
     body: JSON.stringify(crypto),
   });
 
@@ -29,9 +32,7 @@ export async function createCrypto(crypto: ICrypto): Promise<ICrypto> {
 export async function deleteCryptoById(cryptoID: ICrypto["id"]): Promise<ICrypto["id"]> {
   const res = await fetch(BASE_URL, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: JSON_HEADERS,
     body: JSON.stringify({ id: cryptoID }),
   });
 
@@ -41,4 +42,19 @@ export async function deleteCryptoById(cryptoID: ICrypto["id"]): Promise<ICrypto
   }
 
   return cryptoID;
+}
+
+export async function editCryptoById(crypto: ICrypto): Promise<ICrypto> {
+  const res = await fetch(BASE_URL, {
+    method: "PATCH",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ crypto }),
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error?.message || "Error deleting crypto");
+  }
+
+  return crypto;
 }

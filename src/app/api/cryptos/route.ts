@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
+const BASE_URL = "http://localhost:3000/cryptos";
+const JSON_HEADERS = {
+  "Content-Type": "application/json",
+};
 
 const CryptoSchema = z.object({
   id: z.string(),
@@ -10,31 +14,30 @@ const CryptoSchema = z.object({
   price: z.number().min(1),
   amount: z.number().min(1),
 });
- 
+
 export async function GET() {
-  const res = await fetch('http://localhost:3000/cryptos', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  const data = await res.json()
- 
-  return Response.json({ data })
+  // Get all cryptos
+  const res = await fetch(BASE_URL, {
+    headers: JSON_HEADERS,
+  });
+  const data = await res.json();
+
+  return Response.json({ data });
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
+  // Check if the request body is valid
   const result = CryptoSchema.safeParse(body);
 
   if (!result.success) {
     return NextResponse.json(result.error, { status: 400 });
   }
 
-  const res = await fetch('http://localhost:3000/cryptos', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  // Send data to the server
+  const res = await fetch(BASE_URL, {
+    method: "POST",
+    headers: JSON_HEADERS,
     body: JSON.stringify(result.data),
   });
 
@@ -52,12 +55,40 @@ export async function DELETE(request: NextRequest) {
   }
 
   try {
-    const res = await fetch(`http://localhost:3000/cryptos/${result.data.id}`, {
+    const res = await fetch(`${BASE_URL}/${result.data.id}`, {
       method: "DELETE",
     });
 
     if (!res.ok) {
       throw new Error("Error deleting crypto from DB");
+    }
+
+    return new NextResponse("OK", { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: (error as Error).message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  const body = await request.json();
+  const result = CryptoSchema.safeParse(body.crypto);
+
+  if (!result.success) {
+    return NextResponse.json(result.error, { status: 400 });
+  }
+
+  try {
+    const res = await fetch(`${BASE_URL}/${result.data.id}`, {
+      method: "PATCH",
+      headers: JSON_HEADERS,
+      body: JSON.stringify(result.data),
+    });
+
+    if (!res.ok) {
+      throw new Error("Error updating crypto in DB");
     }
 
     return new NextResponse("OK", { status: 200 });
