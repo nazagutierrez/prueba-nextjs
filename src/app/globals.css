@@ -5,6 +5,11 @@
   --color-black-main: #1f1f1f;
 }
 
+* {
+  scrollbar-color: #a07f1d #1f1f1f;
+  scrollbar-width: thin;
+}
+
 body {
   color: var(--color-white-main);
   background-image: repeating-linear-gradient(60deg, #000 0px, #252525 6px, #000 4px);
