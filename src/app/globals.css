@@ -39,6 +39,11 @@
   }
 }
 
+button:active {
+  transition: all 0.3s ease-in-out;
+  transform: scale(0.95);
+}
+
 * {
   scrollbar-color: #a07f1d #1f1f1f;
   scrollbar-width: thin;
