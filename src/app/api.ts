@@ -10,9 +10,11 @@ export async function getCryptos(): Promise<ICrypto[]> {
     const res = await axios.get(BASE_URL);
     const { data } = await res.data;
     return data;
-  } catch (error) {
-    console.error(error);
-    return [];
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Error getting cryptos");
+    }
+    throw new Error("Unexpected error");
   }
 }
 
@@ -20,9 +22,11 @@ export async function createCrypto(crypto: ICrypto): Promise<ICrypto> {
   try {
     const res = await axios.post(BASE_URL, crypto);
     return res.data;
-  } catch (error: any) {
-    console.error(error);
-    throw new Error(error?.response?.data?.message || "Error creating crypto");
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Error creating crypto");
+    }
+    throw new Error("Unexpected error");
   }
 }
 
@@ -32,9 +36,11 @@ export async function deleteCryptoById(cryptoID: ICrypto["id"]): Promise<ICrypto
       data: { id: cryptoID },
     });
     return res.data;
-  } catch (error: any) {
-    console.error(error);
-    throw new Error(error?.response?.data?.message || "Error deleting crypto");
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Error deleting crypto");
+    }
+    throw new Error("Unexpected error");
   }
 }
 
@@ -42,8 +48,10 @@ export async function editCryptoById(crypto: ICrypto): Promise<ICrypto> {
   try {
     const res = await axios.patch(BASE_URL, crypto);
     return res.data;
-  } catch (error: any) {
-    console.error(error);
-    throw new Error(error?.response?.data?.message || "Error deleting crypto");
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Error editing crypto");
+    }
+    throw new Error("Unexpected error");
   }
 }
