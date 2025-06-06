@@ -6,7 +6,7 @@ import { MdHomeFilled } from "react-icons/md";
 
 const Navbar = () => {
   return (
-    <div className="fixed text-white-main w-full flex items-center justify-center z-20">
+    <div className="fixed text-white-main w-full flex items-center justify-center z-50">
       <div className="w-full mx-5 sm:mx-0 sm:w-fit mt-3 h-14 bg-neutral-800 rounded-full flex items-center justify-center">
         <Link
           href="/"
