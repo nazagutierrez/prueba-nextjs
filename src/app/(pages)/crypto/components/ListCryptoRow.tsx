@@ -9,12 +9,12 @@ import { ICrypto } from "@/app/types/types";
 const ListCryptoRow = ({
   cryptos,
   setSelectedCrypto,
-  setIsModalOpen,
+  setIsEditModalOpen,
   deleteCryptoMutation,
 }: {
   cryptos: ICrypto[] | undefined;
   setSelectedCrypto: React.Dispatch<React.SetStateAction<ICrypto | null>>;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   deleteCryptoMutation: UseMutationResult<string, Error, string, unknown>;
 }) => {
   return (
@@ -28,7 +28,7 @@ const ListCryptoRow = ({
             <button
               onClick={() => {
                 setSelectedCrypto(crypto);
-                setIsModalOpen(true);
+                setIsEditModalOpen(true);
               }}
               className="absolute text-xl justify-items-center rounded-r cursor-pointer text-sky-400 hover:text-sky-200 w-7 -left-8 h-[65%] content-center transition-colors"
               style={{ alignSelf: "anchor-center" }}

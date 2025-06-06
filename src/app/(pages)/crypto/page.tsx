@@ -17,7 +17,8 @@ import AddModalMobile from "./components/AddModalMobile";
 
 const Crypto = () => {
   const queryClient = useQueryClient();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null);
   const { user } = useUserContext();
 
@@ -71,7 +72,8 @@ const Crypto = () => {
         tickler.value = '';
         price.value = '';
         amount.value = '';
-        setIsModalOpen(false);
+        setIsEditModalOpen(false);
+        setIsAddModalOpen(false);
       },
       onError: (error: Error) => {
         toast(error.message);
@@ -82,7 +84,7 @@ const Crypto = () => {
   return (
     <div className="animate-fade-in-up relative flex flex-col items-center justify-start p-5 lg:p-20 pt-32 h-full">
       <h1 className={`${titleFont.className} text-4xl pb-10 pt-0 sm:py-5`}>Listed cryptos</h1>
-      <AddModalMobile open={isModalOpen} onClose={setIsModalOpen} handleFormSubmit={handleFormSubmit} />
+      <AddModalMobile open={isAddModalOpen} onClose={setIsAddModalOpen} handleFormSubmit={handleFormSubmit} />
       {user?.username && (
         <h1 className="pb-5">
           Hi{" "}
@@ -96,10 +98,12 @@ const Crypto = () => {
       <div className="absolute mx-auto h-full w-[200px] sm:w-[350px] bg-neutral-600/15 sm:bg-neutral-600/5 blur-3xl -z-20"></div>
       {/* Mobile view */}
       <MobileTable
+        isLoading={isLoading}
         deleteCryptoMutation={deleteCryptoMutation}
         cryptos={cryptos} 
         setSelectedCrypto={setSelectedCrypto}
-        setIsModalOpen={setIsModalOpen}
+        setIsAddModalOpen={setIsAddModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
       />
       <table className="w-3/4 text-sm text-left my-12 text-neutral-300 hidden lg:table">
         <TableHead />
@@ -121,7 +125,7 @@ const Crypto = () => {
             deleteCryptoMutation={deleteCryptoMutation}
             cryptos={cryptos}
             setSelectedCrypto={setSelectedCrypto}
-            setIsModalOpen={setIsModalOpen}
+            setIsEditModalOpen={setIsEditModalOpen}
           />
           <AddCryptoRow handleFormSubmit={handleFormSubmit} />
         </tbody>
@@ -131,9 +135,9 @@ const Crypto = () => {
       {selectedCrypto && (
         <Modal
           crypto={selectedCrypto}
-          open={isModalOpen}
+          open={isEditModalOpen}
           onClose={() => {
-            setIsModalOpen(false);
+            setIsEditModalOpen(false);
             setSelectedCrypto(null);
           }}
         />
