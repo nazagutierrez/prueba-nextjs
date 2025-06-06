@@ -4,7 +4,7 @@ import { IoAddOutline } from "react-icons/io5";
 
 const AddCryptoRow = ({ handleFormSubmit }: { handleFormSubmit: () => void }) => {
   return (
-    <tr className="border-b border-neutral-700 hover:border-yellow-500/30">
+    <tr>
       <FormInput name="cryptoName" type="text" classname="pl-3" />
       <FormInput name="tickler" type="text" classname="text-center" />
       <FormInput name="price" type="number" classname="text-center" />

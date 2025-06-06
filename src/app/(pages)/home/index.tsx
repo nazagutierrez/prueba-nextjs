@@ -10,7 +10,7 @@ const HomePage = () => {
   const { user } = useUserContext();
   return (
     <>
-      <div className="flex flex-col items-center justify-center pt-20 sm:pt-52 h-[70vh]">
+      <div className="flex flex-col items-center justify-center pt-40 sm:pt-60">
         <div className="absolute top-1/4 sm:right-60 h-10 sm:h-32 w-10 sm:w-32 bg-white/50 sm:bg-white/10 blur-3xl"></div>
         <div className="absolute bottom-1/4 sm:left-60 h-10 sm:h-32 w-10 sm:w-32 bg-white/50 sm:bg-white/10 blur-3xl"></div>
         <h1
@@ -35,7 +35,7 @@ const HomePage = () => {
         )}
         <HeroButton />
       </div>
-      <div className="relative flex flex-col items-center justify-center h-screen">
+      <div className="relative flex flex-col items-center justify-center pt-16 sm:pt-40 pb-20">
         <Image
           src="/image.avif"
           alt="crypto market"

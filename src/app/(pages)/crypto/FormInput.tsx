@@ -10,7 +10,7 @@ const FormInput = ({
 }: FormProps) => {
   return (
     <th
-      className={`py-4 font-medium whitespace-nowrap text-white ${classname}`}
+      className={`py-4 font-medium whitespace-nowrap text-white border-b border-yellow-300/40 rounded hover:border-yellow-300/70 focus-within:border-yellow-300/70 ${classname}`}
     >
       <input
         onKeyDown={(e) =>

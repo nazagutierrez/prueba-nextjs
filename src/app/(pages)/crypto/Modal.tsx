@@ -54,7 +54,7 @@ export default function Modal({ open, onClose, crypto }: ModalProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed font-medium text-white inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] bg-opacity-50">
+    <div className="fixed font-medium text-white inset-0 px-6 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] bg-opacity-50">
       <div className="bg-neutral-800 rounded-lg shadow-xl w-full max-w-[400px]">
         <div className="flex items-center p-4 pb-6">
           <CiEdit className="h-8 w-8 text-sky-400" />

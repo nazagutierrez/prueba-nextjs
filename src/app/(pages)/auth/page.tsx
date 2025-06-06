@@ -44,8 +44,8 @@ const Auth = () => {
           <Image src="/login.png" alt="crypto market" className='h-[700px] object-cover aspect-square border border-t-yellow-500/40 sm:border-t-0 sm:border-r-yellow-500/40 rounded-sm overflow-hidden z-20' width={1000} height={500} />
         </div>
         <div className="sm:w-1/2 pl-5 md:pl-10 lg:pl-20 pr-5 h-full">
-          <div className="h-full py-20 sm:py-0 flex flex-col items-start justify-center">
-            <div className="gap-5 mb-4 flex flex-col items-start justify-center">
+          <div className="h-full py-20 sm:py-0 flex flex-col sm:items-start justify-center">
+            <div className="gap-5 mb-4 flex flex-col items-center sm:items-start justify-center">
               <h1 className="text-3xl">{ isRegister ? "Create an account" : "Login in your account" }</h1>
               <div className="flex gap-1">
                 <p>
