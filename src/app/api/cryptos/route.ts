@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+// Controllers for CRUD (ONLY DEVELOPMENT)
+
 export const dynamic = "force-static";
 const BASE_URL = process.env.EXTERNAL_API_BASE_URL || "http://localhost:3000/cryptos";
 const JSON_HEADERS = {
@@ -74,7 +76,7 @@ export async function DELETE(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   const body = await request.json();
-  const result = CryptoSchema.safeParse(body.crypto);
+  const result = CryptoSchema.safeParse(body);
 
   if (!result.success) {
     return NextResponse.json(result.error, { status: 400 });

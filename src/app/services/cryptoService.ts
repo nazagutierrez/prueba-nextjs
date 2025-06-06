@@ -5,7 +5,7 @@ const JSON_HEADERS = {
   "Content-Type": "application/json",
 };
 
-// Controllers for CRUD
+// Controllers for CRUD (UNUSED, use @/app/api)
 
 export async function getCryptos(): Promise<ICrypto[]> {
   const res = await fetch(BASE_URL);
