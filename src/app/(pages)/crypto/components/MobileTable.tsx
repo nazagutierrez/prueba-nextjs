@@ -43,23 +43,26 @@ const MobileTable = ({
             <CgSpinner className="animate-spin absolute -bottom-52 inset-0 mx-auto h-10 text-yellow-400/80 text-2xl" />
           )
         }
+        {
+          cryptos?.length === 0 && <h1>No cryptos found</h1>
+        }
         {cryptos?.map((crypto) => (
           <div
-            key={crypto.name}
+            key={crypto?.name}
             className="w-[220px] h-[220px] flex flex-col justify-between items-start relative border border-neutral-700 rounded p-4 text-neutral-300"
           >
             <div>
               <p>
-                <span className="text-yellow-100/60">Crypto name:</span> {crypto.name}
+                <span className="text-yellow-100/60">Crypto name:</span> {crypto?.name}
               </p>
               <p>
-                <span className="text-yellow-100/60">Ticker:</span> {crypto.ticker}
+                <span className="text-yellow-100/60">Ticker:</span> {crypto?.ticker}
               </p>
               <p>
-                <span className="text-yellow-100/60">Price:</span> ${crypto.price}
+                <span className="text-yellow-100/60">Price:</span> ${crypto?.price}
               </p>
               <p>
-                <span className="text-yellow-100/60">Amount:</span> {crypto.amount}
+                <span className="text-yellow-100/60">Amount:</span> {crypto?.amount}
               </p>
             </div>
             <div className="flex gap-3 w-full h-1/3 pt-4">
