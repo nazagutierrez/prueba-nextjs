@@ -13,6 +13,7 @@ import AddCryptoRow from "./components/AddCryptoRow";
 import ListCryptoRow from "./components/ListCryptoRow";
 import TableHead from "./components/TableHead";
 import MobileTable from "./components/MobileTable";
+import AddModalMobile from "./components/AddModalMobile";
 
 const Crypto = () => {
   const queryClient = useQueryClient();
@@ -70,6 +71,7 @@ const Crypto = () => {
         tickler.value = '';
         price.value = '';
         amount.value = '';
+        setIsModalOpen(false);
       },
       onError: (error: Error) => {
         toast(error.message);
@@ -79,7 +81,8 @@ const Crypto = () => {
 
   return (
     <div className="animate-fade-in-up relative flex flex-col items-center justify-start p-5 lg:p-20 pt-32 h-full">
-      <h1 className={`${titleFont.className} text-4xl py-5`}>Listed cryptos</h1>
+      <h1 className={`${titleFont.className} text-4xl pb-10 pt-0 sm:py-5`}>Listed cryptos</h1>
+      <AddModalMobile open={isModalOpen} onClose={setIsModalOpen} handleFormSubmit={handleFormSubmit} />
       {user?.username && (
         <h1 className="pb-5">
           Hi{" "}
@@ -90,7 +93,7 @@ const Crypto = () => {
         </h1>
       )}
       <form onSubmit={handleFormSubmit} id="myform"></form>
-      <div className="absolute mx-auto h-full w-[350px] bg-neutral-600/5 blur-3xl -z-20"></div>
+      <div className="absolute mx-auto h-full w-[200px] sm:w-[350px] bg-neutral-600/15 sm:bg-neutral-600/5 blur-3xl -z-20"></div>
       {/* Mobile view */}
       <MobileTable
         deleteCryptoMutation={deleteCryptoMutation}
