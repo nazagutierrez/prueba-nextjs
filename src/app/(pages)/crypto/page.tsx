@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCryptos, createCrypto, deleteCryptoById } from "@/app/services/cryptoService";
+import { getCryptos, createCrypto, deleteCryptoById } from "@/app/api";
 import { ICrypto } from "@/app/types/types";
 import { titleFont } from "@/app/fonts";
 import Skeleton from "@/app/utils/Skeleton";
@@ -110,14 +110,16 @@ const Crypto = () => {
         {isLoading && <Skeleton />}
         
         {cryptos?.length === 0 && (
-          <tr className="border-b w-full border-neutral-700">
-            <th
-              colSpan={4}
-              className="w-full py-4 text-center font-medium  text-neutral-300"
-            >
-              No cryptos listed
-            </th>
-          </tr>
+          <tbody>
+            <tr className="border-b w-full border-neutral-700">
+              <th
+                colSpan={4}
+                className="w-full py-4 text-center font-medium  text-neutral-300"
+              >
+                No cryptos listed
+              </th>
+            </tr>
+          </tbody>
         )}
 
         <tbody>

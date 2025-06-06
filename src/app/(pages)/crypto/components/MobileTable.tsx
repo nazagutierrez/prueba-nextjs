@@ -37,14 +37,14 @@ const MobileTable = ({
         <IoAddOutline />
         </i>
       </button>
+      {
+        cryptos?.length === 0 && <h1>No cryptos found</h1>
+      }
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:hidden">
         {
           isLoading && (
             <CgSpinner className="animate-spin absolute -bottom-52 inset-0 mx-auto h-10 text-yellow-400/80 text-2xl" />
           )
-        }
-        {
-          cryptos?.length === 0 && <h1>No cryptos found</h1>
         }
         {cryptos?.map((crypto) => (
           <div
