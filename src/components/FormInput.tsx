@@ -1,4 +1,4 @@
-import { FormProps } from "@/app/types/types";
+import { FormProps } from "@/types/types";
 import React from "react";
 
 const FormInput = ({

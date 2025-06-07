@@ -1,10 +1,10 @@
 "use client";
 
-import { titleFont } from "@/app/fonts";
+import { titleFont } from "@/fonts";
 import Image from "next/image";
 import React from "react";
-import HeroButton from "./HeroButton";
-import { useUserContext } from "@/app/context/userContext";
+import HeroButton from "../../components/home/HeroButton";
+import { useUserContext } from "@/context/userContext";
 
 const HomePage = () => {
   const { user } = useUserContext();

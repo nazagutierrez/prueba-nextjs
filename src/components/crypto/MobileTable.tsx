@@ -1,4 +1,4 @@
-import { ICrypto } from "@/app/types/types";
+import { ICrypto } from "@/types/types";
 import { UseMutationResult } from "@tanstack/react-query";
 import React from "react";
 import { CgSpinner } from "react-icons/cg";

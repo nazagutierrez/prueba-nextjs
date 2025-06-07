@@ -1,7 +1,7 @@
 "use client";
 
-import { editCryptoById } from "@/app/api";
-import { ICrypto, ModalProps } from "@/app/types/types";
+import { editCryptoById } from "@/api";
+import { ICrypto, ModalProps } from "@/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useRef } from "react";
 import { CiEdit } from "react-icons/ci";

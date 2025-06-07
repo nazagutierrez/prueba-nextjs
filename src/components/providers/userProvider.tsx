@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { UserContext } from "./userContext";
-import { IUser } from "../types/types";
+import { UserContext } from "../../context/userContext";
+import { IUser } from "../../types/types";
 
 type Props = {
   children: React.ReactNode;

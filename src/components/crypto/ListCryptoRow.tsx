@@ -4,7 +4,7 @@ import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { UseMutationResult } from "@tanstack/react-query";
-import { ICrypto } from "@/app/types/types";
+import { ICrypto } from "@/types/types";
 
 const ListCryptoRow = ({
   cryptos,

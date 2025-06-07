@@ -2,18 +2,18 @@
 
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCryptos, createCrypto, deleteCryptoById } from "@/app/api";
-import { ICrypto } from "@/app/types/types";
-import { titleFont } from "@/app/fonts";
-import Skeleton from "@/app/utils/Skeleton";
-import { Slide, ToastContainer, toast } from "react-toastify";
-import { useUserContext } from "@/app/context/userContext";
-import Modal from "./Modal";
-import AddCryptoRow from "./components/AddCryptoRow";
-import ListCryptoRow from "./components/ListCryptoRow";
-import TableHead from "./components/TableHead";
-import MobileTable from "./components/MobileTable";
-import AddModalMobile from "./components/AddModalMobile";
+import { getCryptos, createCrypto, deleteCryptoById } from "@/api";
+import { ICrypto } from "@/types/types";
+import { titleFont } from "@/fonts";
+import Skeleton from "@/components/Skeleton";
+import { toast } from "react-toastify";
+import Modal from "../../components/crypto/Modal";
+import AddCryptoRow from "../../components/crypto/AddCryptoRow";
+import ListCryptoRow from "../../components/crypto/ListCryptoRow";
+import TableHead from "../../components/crypto/TableHead";
+import MobileTable from "../../components/crypto/MobileTable";
+import AddModalMobile from "../../components/crypto/AddModalMobile";
+import { useUserContext } from "@/context/userContext";
 
 const Crypto = () => {
   const queryClient = useQueryClient();
@@ -144,15 +144,6 @@ const Crypto = () => {
           }}
         />
       )}
-
-      <ToastContainer
-        theme="dark"
-        transition={Slide}
-        autoClose={1500}
-        hideProgressBar
-        limit={3}
-        draggable={true}
-      />
     </div>
   );
 };

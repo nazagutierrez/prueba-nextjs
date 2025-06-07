@@ -1,11 +1,11 @@
 "use client"
 
-import { useUserContext } from "@/app/context/userContext";
+import { useUserContext } from "@/context/userContext";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { CgSpinner } from "react-icons/cg";
-import { Slide, toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Auth = () => {
   const username = useRef<HTMLInputElement>(null);
@@ -99,14 +99,6 @@ const Auth = () => {
           </div>
         </div>
       </div>
-      <ToastContainer 
-        theme="dark"
-        transition={Slide}
-        autoClose={1500}
-        hideProgressBar
-        limit={3}
-        draggable={true}
-      />
     </div>
   );
 };
